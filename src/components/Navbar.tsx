@@ -24,9 +24,9 @@ export default function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      // Navbar sample point in viewport
+      // Navbar sample point in viewport (vertical center of the bar)
       const sampleX = window.innerWidth / 2;
-      const sampleY = 48;
+      const sampleY = 32;
 
       const elements = document.elementsFromPoint(sampleX, sampleY);
       const lightSection = elements.some((el) => {
@@ -58,32 +58,70 @@ export default function Navbar({
     { name: 'Tentang Apotek', href: '/#tentang', isExternal: false },
   ];
 
+  const whatsappHref =
+    'https://wa.me/6282308230823?text=Halo%20Rafa%20Apotek,%20saya%20ingin%20tebus%20resep%20dokter.';
+
+  // Design-system tokens (MASTER.md): light = alabaster bar, dark = botanical bar.
+  const barTone = isLightSection
+    ? 'bg-bg text-ink border-border'
+    : 'bg-brand text-ink-on-dark border-border-on-dark';
+  const focusRing = isLightSection
+    ? 'focus-visible:outline-interactive'
+    : 'focus-visible:outline-accent-on-dark';
+  const linkClass = `inline-flex items-center min-h-11 px-3 text-sm font-medium whitespace-nowrap underline-offset-[10px] decoration-2 hover:underline transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 ${focusRing} ${
+    isLightSection ? 'decoration-interactive' : 'decoration-accent-on-dark'
+  }`;
+  const iconButtonClass = `relative inline-flex items-center justify-center w-11 h-11 rounded-md transition-colors duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 ${focusRing} ${
+    isLightSection ? 'hover:bg-surface-sunken' : 'hover:bg-white/10'
+  }`;
+  const badgeClass = isLightSection
+    ? 'bg-interactive text-on-interactive'
+    : 'bg-accent-on-dark text-brand';
+  const primaryButtonClass = `inline-flex items-center justify-center gap-1.5 min-h-11 px-5 rounded-md text-sm font-medium transition-colors duration-150 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 ${focusRing} ${
+    isLightSection
+      ? 'bg-interactive text-on-interactive hover:bg-interactive-hover hover:text-white'
+      : 'bg-accent-on-dark text-brand hover:brightness-105'
+  }`;
+
+  const cartButton = (
+    <button
+      onClick={handleOpenCart}
+      className={iconButtonClass}
+      aria-label="Lihat Keranjang Belanja"
+    >
+      <ShoppingBag className="w-5 h-5" aria-hidden="true" />
+      {cartCount > 0 && (
+        <span
+          className={`absolute top-1 right-1 min-w-[18px] h-[18px] px-1 rounded-full text-[11px] font-semibold leading-none flex items-center justify-center ${badgeClass}`}
+        >
+          {cartCount}
+        </span>
+      )}
+    </button>
+  );
+
   return (
-    <header className="fixed top-4 md:top-6 inset-x-0 z-50 w-full px-4 sm:px-6 md:px-8 max-w-6xl mx-auto transition-all duration-300 pointer-events-none">
-      {/* Dynamic Glass Navbar Container adapting to Light/Dark backgrounds */}
+    <header
+      data-on={isLightSection ? 'light' : 'dark'}
+      className={`fixed top-0 inset-x-0 z-50 w-full border-b font-sans transition-colors duration-200 ${barTone}`}
+    >
       <nav
-        className={`pointer-events-auto relative flex items-center justify-between px-4 sm:px-6 py-2.5 sm:py-3 rounded-full backdrop-blur-md backdrop-saturate-150 transition-all duration-300 ${
-          isLightSection
-            ? 'bg-white/60 hover:bg-white/75 border border-black/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.06),inset_0_1px_1px_0_rgba(255,255,255,0.9)]'
-            : 'bg-white/[0.05] hover:bg-white/[0.08] border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.2),inset_0_1px_1px_0_rgba(255,255,255,0.25)]'
-        }`}
+        aria-label="Navigasi utama"
+        className="max-w-7xl mx-auto h-14 md:h-16 px-5 sm:px-8 lg:px-12 flex items-center justify-between"
       >
         {/* Brand Logo - Rafa Apotek */}
-        <Link href="/" className="flex items-center gap-2.5 group pl-1">
-          <div className="w-6 h-6 rounded-md bg-[#6ae7b8] flex items-center justify-center text-[#091f2c] shadow-sm transition-transform duration-200 group-hover:scale-105">
-            <Plus className="w-4 h-4 stroke-[3]" />
+        <Link
+          href="/"
+          className={`flex items-center gap-2.5 min-h-11 focus-visible:outline-2 focus-visible:outline-offset-2 ${focusRing}`}
+        >
+          <div className="w-6 h-6 rounded-sm bg-interactive flex items-center justify-center text-brand">
+            <Plus className="w-4 h-4 stroke-[3]" aria-hidden="true" />
           </div>
-          <span
-            className={`text-base sm:text-lg font-medium tracking-tight transition-colors duration-300 ${
-              isLightSection ? 'text-[#091f2c]' : 'text-white'
-            }`}
-          >
-            Rafa Apotek
-          </span>
+          <span className="font-display text-xl font-normal tracking-tight">Rafa Apotek</span>
         </Link>
 
         {/* Center Nav Links - Pharmacy Menus */}
-        <div className="hidden md:flex items-center gap-1 lg:gap-2">
+        <div className="hidden lg:flex items-center gap-1 xl:gap-3">
           {navLinks.map((link) =>
             link.isExternal ? (
               <a
@@ -91,24 +129,12 @@ export default function Navbar({
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`px-3.5 py-1.5 rounded-full text-xs font-normal tracking-wide transition-all duration-300 cursor-pointer ${
-                  isLightSection
-                    ? 'text-[#091f2c]/75 hover:text-[#091f2c] hover:bg-black/[0.05]'
-                    : 'text-slate-300 hover:text-white hover:bg-white/[0.08]'
-                }`}
+                className={linkClass}
               >
                 {link.name}
               </a>
             ) : (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-normal tracking-wide transition-all duration-300 cursor-pointer ${
-                  isLightSection
-                    ? 'text-[#091f2c]/75 hover:text-[#091f2c] hover:bg-black/[0.05]'
-                    : 'text-slate-300 hover:text-white hover:bg-white/[0.08]'
-                }`}
-              >
+              <Link key={link.name} href={link.href} className={linkClass}>
                 {link.name}
               </Link>
             )
@@ -116,115 +142,101 @@ export default function Navbar({
         </div>
 
         {/* Right Action Button & Cart */}
-        <div className="hidden md:flex items-center gap-3 pr-1">
-          <button
-            onClick={handleOpenCart}
-            className={`relative p-2 rounded-full transition-all duration-200 active:scale-90 cursor-pointer ${
-              isLightSection
-                ? 'text-[#091f2c] hover:bg-black/[0.05]'
-                : 'text-slate-300 hover:text-white hover:bg-white/10'
-            }`}
-            aria-label="Lihat Keranjang Belanja"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#5beba6] text-[#091a24] text-[10px] font-bold flex items-center justify-center animate-in zoom-in-75">
-                {cartCount}
-              </span>
-            )}
-          </button>
-
+        <div className="hidden lg:flex items-center gap-3">
+          {cartButton}
           <a
-            href="https://wa.me/6282308230823?text=Halo%20Rafa%20Apotek,%20saya%20ingin%20tebus%20resep%20dokter."
+            href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4.5 py-2 rounded-full text-xs font-semibold text-[#091a24] bg-gradient-to-r from-[#5beba6] to-[#7beea6] hover:brightness-110 hover:shadow-[0_0_20px_rgba(91,235,166,0.35)] active:scale-95 transition-all shadow-sm cursor-pointer"
+            className={primaryButtonClass}
           >
             <span>Tebus Resep</span>
-            <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+            <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
           </a>
         </div>
 
         {/* Mobile menu trigger & cart */}
-        <div className="flex md:hidden items-center gap-2">
-          <button
-            onClick={handleOpenCart}
-            className={`relative p-2 rounded-full transition-all duration-200 active:scale-90 cursor-pointer ${
-              isLightSection
-                ? 'text-[#091f2c] hover:bg-black/[0.05]'
-                : 'text-slate-300 hover:text-white hover:bg-white/10'
-            }`}
-            aria-label="Lihat Keranjang Belanja"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#5beba6] text-[#091a24] text-[10px] font-bold flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </button>
-
+        <div className="flex lg:hidden items-center gap-1 -mr-2">
+          {cartButton}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`p-2 rounded-full transition-colors duration-300 ${
-              isLightSection
-                ? 'text-[#091f2c] hover:bg-black/[0.05]'
-                : 'text-slate-300 hover:text-white hover:bg-white/10'
-            }`}
+            className={`${iconButtonClass} transition-transform duration-200 active:scale-90`}
             aria-label="Buka Menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <div className="relative w-5 h-5 flex items-center justify-center">
+              <Menu
+                className={`w-5 h-5 transition-all duration-300 absolute ${
+                  mobileMenuOpen ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'
+                }`}
+                aria-hidden="true"
+              />
+              <X
+                className={`w-5 h-5 transition-all duration-300 absolute ${
+                  mobileMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'
+                }`}
+                aria-hidden="true"
+              />
+            </div>
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu Dropdown with Glassmorphism */}
-      {mobileMenuOpen && (
-        <div
-          className={`pointer-events-auto md:hidden mt-3 p-5 backdrop-blur-2xl rounded-3xl border shadow-[0_16px_40px_rgba(0,0,0,0.35)] flex flex-col gap-3 animate-in fade-in slide-in-from-top-3 duration-200 transition-colors ${
-            isLightSection
-              ? 'bg-white/90 border-black/10 text-[#091f2c]'
-              : 'bg-[#091a24]/90 border-white/20 text-white'
-          }`}
-        >
-          {navLinks.map((link) =>
-            link.isExternal ? (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`py-2 text-sm font-medium transition-colors ${
-                  isLightSection ? 'hover:text-[#091f2c]' : 'hover:text-emerald-400'
-                }`}
-              >
-                {link.name}
-              </a>
-            ) : (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`py-2 text-sm font-medium transition-colors ${
-                  isLightSection ? 'hover:text-[#091f2c]' : 'hover:text-emerald-400'
-                }`}
-              >
-                {link.name}
-              </Link>
-            )
-          )}
-          <a
-            href="https://wa.me/6282308230823?text=Halo%20Rafa%20Apotek,%20saya%20ingin%20tebus%20resep%20dokter."
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMobileMenuOpen(false)}
-            className="mt-2 text-center py-2.5 rounded-full text-xs font-semibold text-[#091a24] bg-gradient-to-r from-[#5beba6] to-[#7beea6] shadow-sm cursor-pointer"
+      {/* Mobile Menu Panel with Smooth Grid Height & Opacity Animation */}
+      <div
+        id="mobile-menu"
+        className={`lg:hidden absolute top-full inset-x-0 border-b grid transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${barTone} ${
+          mobileMenuOpen
+            ? 'grid-rows-[1fr] opacity-100 shadow-xl'
+            : 'grid-rows-[0fr] opacity-0 pointer-events-none border-b-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div
+            className={`px-5 sm:px-8 pt-2 pb-5 flex flex-col transition-transform duration-300 ease-out ${
+              mobileMenuOpen ? 'translate-y-0' : '-translate-y-2'
+            }`}
           >
-            Tebus Resep Dokter ↗
-          </a>
+            {navLinks.map((link) =>
+              link.isExternal ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center min-h-12 text-base font-medium border-b ${
+                    isLightSection ? 'border-border' : 'border-border-on-dark'
+                  } focus-visible:outline-2 focus-visible:outline-offset-2 ${focusRing}`}
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center min-h-12 text-base font-medium border-b ${
+                    isLightSection ? 'border-border' : 'border-border-on-dark'
+                  } focus-visible:outline-2 focus-visible:outline-offset-2 ${focusRing}`}
+                >
+                  {link.name}
+                </Link>
+              )
+            )}
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`mt-4 w-full ${primaryButtonClass}`}
+            >
+              Tebus Resep Dokter ↗
+            </a>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

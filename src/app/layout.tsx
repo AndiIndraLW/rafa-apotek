@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import '@fontsource-variable/inter';
 import { ppMuseum } from './fonts';
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className={ppMuseum.variable}>
-      <body className="antialiased bg-[#0e2334] text-slate-100 selection:bg-[#5beba6] selection:text-[#09161e]">
+      <body className="antialiased bg-[#FBF9F5] text-[#111C18] selection:bg-[#34D399] selection:text-[#0D2B24] font-sans">
         <CartProvider>
           {children}
         </CartProvider>

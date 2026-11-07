@@ -80,11 +80,11 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
       onClose={resetAndClose}
       className="m-auto p-0 bg-transparent backdrop:bg-black/70 backdrop:backdrop-blur-sm max-w-xl w-[92vw] text-slate-100 rounded-3xl outline-none border-none shadow-2xl overflow-hidden transition-all"
     >
-      <div className="bg-[#0e2334] border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col relative">
+      <div className="bg-[#0D2B24] border border-white/15 rounded-3xl p-6 sm:p-8 flex flex-col relative">
         {/* Close Button */}
         <button
           onClick={resetAndClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-emerald-100 hover:text-white transition-colors cursor-pointer"
           aria-label="Tutup formulir"
         >
           <X className="w-4 h-4" />
@@ -94,13 +94,13 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
           <div>
             {/* Header & Step progress */}
             <div className="mb-6">
-              <div className="flex items-center justify-between text-xs text-emerald-400 font-mono mb-2">
+              <div className="flex items-center justify-between text-xs text-[#34D399] font-mono mb-2">
                 <span>LANGKAH {currentStep} DARI 4 • RAFA APOTEK</span>
                 <span>{Math.round((currentStep / 4) * 100)}% SELESAI</span>
               </div>
-              <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+              <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-[#5beba6] to-[#aef773] h-full transition-all duration-300"
+                  className="bg-[#34D399] h-full transition-all duration-300"
                   style={{ width: `${(currentStep / 4) * 100}%` }}
                 />
               </div>
@@ -133,7 +133,7 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
                         onClick={() => toggleSelection('kategori', item)}
                         className={`text-left p-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${
                           isSelected
-                            ? 'bg-[#5beba6]/15 border-[#5beba6] text-white font-medium'
+                            ? 'bg-[#34D399]/20 border-[#34D399] text-white font-medium'
                             : 'bg-white/[0.03] border-white/10 text-slate-300 hover:bg-white/[0.06]'
                         }`}
                       >
@@ -173,7 +173,7 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
                         onClick={() => toggleSelection('kondisi', item)}
                         className={`text-left p-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${
                           isSelected
-                            ? 'bg-[#5beba6]/15 border-[#5beba6] text-white font-medium'
+                            ? 'bg-[#34D399]/20 border-[#34D399] text-white font-medium'
                             : 'bg-white/[0.03] border-white/10 text-slate-300 hover:bg-white/[0.06]'
                         }`}
                       >
@@ -210,7 +210,7 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
                         onClick={() => setAnswers({ ...answers, waktu: item.title })}
                         className={`w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between cursor-pointer ${
                           isSelected
-                            ? 'bg-[#5beba6]/15 border-[#5beba6] text-white'
+                            ? 'bg-[#34D399]/20 border-[#34D399] text-white'
                             : 'bg-white/[0.03] border-white/10 text-slate-300 hover:bg-white/[0.06]'
                         }`}
                       >
@@ -276,7 +276,7 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
                 type="button"
                 onClick={handleNext}
                 disabled={currentStep === 4 && answers.kontak.length < 9}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold text-[#081822] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold text-[#0D2B24] bg-[#34D399] hover:bg-[#2bc28a] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shadow-sm"
               >
                 <span>{currentStep === 4 ? 'Kirimkan ke Apoteker' : 'Lanjut'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -286,19 +286,19 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
         ) : (
           /* Confirmation Success State */
           <div className="py-8 text-center animate-in zoom-in-95 duration-300">
-            <div className="w-14 h-14 rounded-full bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 flex items-center justify-center mx-auto mb-5">
+            <div className="w-14 h-14 rounded-full bg-[#34D399]/20 text-[#34D399] border border-[#34D399]/30 flex items-center justify-center mx-auto mb-5">
               <Sparkles className="w-7 h-7" />
             </div>
-            <h3 className="font-serif text-3xl text-white font-normal mb-3">
+            <h3 className="font-display text-3xl text-white font-normal mb-3">
               Permintaan Obat Diterima!
             </h3>
-            <p className="text-slate-300 text-xs sm:text-sm font-light max-w-md mx-auto leading-relaxed mb-8">
+            <p className="text-emerald-100/80 text-xs sm:text-sm font-light max-w-md mx-auto leading-relaxed mb-8">
               Apoteker kami di <strong className="text-white">Rafa Apotek</strong> sedang menyiapkan rincian obat Anda.
-              Kami akan menghubungi nomor <span className="text-emerald-300 font-medium">{answers.kontak}</span> dalam waktu singkat untuk konfirmasi pengantaran.
+              Kami akan menghubungi nomor <span className="text-[#34D399] font-semibold">{answers.kontak}</span> dalam waktu singkat untuk konfirmasi pengantaran.
             </p>
             <button
               onClick={resetAndClose}
-              className="px-6 py-2.5 rounded-full text-xs font-semibold text-[#091a24] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 transition-all cursor-pointer"
+              className="px-6 py-2.5 rounded-full text-xs font-semibold text-[#0D2B24] bg-[#34D399] hover:bg-[#2bc28a] active:scale-95 transition-all cursor-pointer shadow-sm"
             >
               Kembali ke Beranda
             </button>

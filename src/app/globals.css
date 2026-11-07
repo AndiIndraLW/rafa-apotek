@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* Design system tokens (design-system/rafa-apotek/MASTER.md, Revision 3).
+   Added incrementally: only tokens used by implemented sections are defined here. */
+@theme {
+  --color-brand: #0D2B24;
+  --color-brand-hover: #123A31;
+  --color-bg: #FBF9F5;
+  --color-surface: #FFFFFF;
+  --color-surface-sunken: #F3EFE6;
+  --color-ink: #111C18;
+  --color-ink-muted: #4B5E57;
+  --color-interactive: #059669;
+  --color-interactive-hover: #047857;
+  --color-on-interactive: #111C18;
+  --color-accent-on-dark: #34D399;
+  --color-ink-on-dark: #FBF9F5;
+  --color-ink-muted-on-dark: #A9BDB5;
+  --color-border: rgb(13 43 36 / 0.10);
+  --color-border-strong: rgb(13 43 36 / 0.24);
+  --color-border-on-dark: rgb(251 249 245 / 0.16);
+
+  --font-display: var(--font-pp-museum), 'PP Museum', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
 @font-face {
   font-family: 'PP Museum';
   src: url('/Fonts/ppmuseum-light.otf') format('opentype');
@@ -52,20 +77,40 @@
   html {
     scroll-behavior: smooth;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #0e2334;
-    color: #f1f5f9;
+    background-color: #FBF9F5;
+    color: #111C18;
   }
 
   ::selection {
-    background-color: #5ff39d;
-    color: #09161e;
+    background-color: #34D399;
+    color: #0D2B24;
   }
 }
 
-.font-serif {
+.font-serif,
+.font-display {
   font-family: var(--font-pp-museum), 'PP Museum', Georgia, Cambria, 'Times New Roman', serif;
 }
 
 .font-sans {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

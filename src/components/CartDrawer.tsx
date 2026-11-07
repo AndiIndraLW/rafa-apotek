@@ -81,21 +81,21 @@ export default function CartDrawer({
             transition: 'transform 450ms cubic-bezier(0.16, 1, 0.3, 1)',
             willChange: 'transform',
           }}
-          className="pointer-events-auto w-screen max-w-md bg-[#0b1c28] border-l border-white/10 h-full flex flex-col justify-between p-6 sm:p-7 relative shadow-[0_0_60px_rgba(0,0,0,0.6)] text-slate-100 motion-reduce:transition-none"
+          className="pointer-events-auto w-screen max-w-md bg-[#0D2B24] border-l border-white/15 h-full flex flex-col justify-between p-6 sm:p-7 relative shadow-[0_0_60px_rgba(0,0,0,0.6)] text-white motion-reduce:transition-none"
         >
           {/* Header */}
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <ShoppingBag className="w-4 h-4 text-emerald-400" />
-                <h3 className="font-serif text-xl text-white font-normal">Keranjang Belanja Anda</h3>
-                <span className="text-xs font-mono text-slate-400">
+                <ShoppingBag className="w-4 h-4 text-[#34D399]" />
+                <h3 className="font-display text-xl text-white font-normal">Keranjang Belanja Anda</h3>
+                <span className="text-xs font-mono text-emerald-200/70">
                   ({items.reduce((s, i) => s + i.quantity, 0)})
                 </span>
               </div>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-emerald-100 hover:text-white transition-colors cursor-pointer"
                 aria-label="Tutup Keranjang"
               >
                 <X className="w-4 h-4" />
@@ -104,24 +104,24 @@ export default function CartDrawer({
 
             {/* Free Shipping Progress */}
             <div className="py-3.5 border-b border-white/10 text-xs">
-              <div className="flex items-center justify-between text-slate-300 text-[11px] mb-1.5 font-light">
+              <div className="flex items-center justify-between text-emerald-100/80 text-[11px] mb-1.5 font-light">
                 {subtotal >= freeShippingThreshold ? (
-                  <span className="text-emerald-300 font-medium flex items-center gap-1">
-                    <Sparkles className="w-3 h-3" /> Anda mendapatkan Gratis Ongkir Suhu Dingin!
+                  <span className="text-[#34D399] font-medium flex items-center gap-1">
+                    <Sparkles className="w-3 h-3" /> Anda mendapatkan Gratis Ongkir!
                   </span>
                 ) : (
                   <span>
                     Tambah{' '}
-                    <strong className="text-white">
+                    <strong className="text-white font-medium">
                       Rp {(freeShippingThreshold - subtotal).toLocaleString('id-ID')}
                     </strong>{' '}
-                    lagi untuk bebas ongkir ekspres
+                    lagi untuk bebas ongkir
                   </span>
                 )}
               </div>
-              <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+              <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-[#5beba6] to-[#aef773] h-full transition-all duration-300"
+                  className="bg-[#34D399] h-full transition-all duration-300"
                   style={{ width: `${progressToFreeShipping}%` }}
                 />
               </div>
@@ -206,7 +206,7 @@ export default function CartDrawer({
             <button
               onClick={onProceedCheckout}
               disabled={items.length === 0}
-              className="w-full py-3 rounded-full text-xs font-semibold text-[#091a24] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 rounded-full text-xs font-semibold text-[#0D2B24] bg-[#34D399] hover:bg-[#2bc28a] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Lanjut ke Pembayaran Demo</span>
               <ArrowRight className="w-3.5 h-3.5" />

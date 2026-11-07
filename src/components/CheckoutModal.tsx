@@ -70,38 +70,38 @@ export default function CheckoutModal({
       onClose={onClose}
       className="m-auto p-0 bg-transparent backdrop:bg-black/80 backdrop:backdrop-blur-md max-w-xl w-[92vw] text-slate-100 rounded-3xl outline-none border-none shadow-2xl overflow-hidden"
     >
-      <div className="bg-[#0b1c28] border border-white/10 rounded-3xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#0D2B24] border border-white/15 rounded-3xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-emerald-100 hover:text-white transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>
 
         {step !== 'complete' ? (
           <div>
-            <div className="flex items-center gap-2 mb-2 text-xs font-mono uppercase text-emerald-400">
+            <div className="flex items-center gap-2 mb-2 text-xs font-mono uppercase text-[#34D399]">
               <Lock className="w-3.5 h-3.5" />
               <span>PEMBAYARAN AMAN TERENKRIPSI 256-BIT</span>
             </div>
 
-            <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-6">
+            <h3 className="font-display text-2xl sm:text-3xl text-white font-normal mb-6">
               {step === 'shipping' ? 'Detail Pengiriman' : 'Metode Pembayaran'}
             </h3>
 
             {/* Stepper indicator */}
             <div className="flex items-center gap-2 mb-6">
               <div
-                className={`flex-1 h-1 rounded-full ${
+                className={`flex-1 h-1.5 rounded-full ${
                   step === 'shipping' || step === 'payment'
-                    ? 'bg-gradient-to-r from-[#5beba6] to-[#aef773]'
+                    ? 'bg-[#34D399]'
                     : 'bg-white/10'
                 }`}
               />
               <div
-                className={`flex-1 h-1 rounded-full ${
+                className={`flex-1 h-1.5 rounded-full ${
                   step === 'payment'
-                    ? 'bg-gradient-to-r from-[#5beba6] to-[#aef773]'
+                    ? 'bg-[#34D399]'
                     : 'bg-white/10'
                 }`}
               />
@@ -195,7 +195,7 @@ export default function CheckoutModal({
                 <div className="pt-4 flex justify-end">
                   <button
                     type="submit"
-                    className="px-6 py-2.5 rounded-full text-xs font-semibold text-[#081822] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 transition-all shadow-sm cursor-pointer"
+                    className="px-6 py-2.5 rounded-full text-xs font-semibold text-[#0D2B24] bg-[#34D399] hover:bg-[#2bc28a] active:scale-95 transition-all shadow-md cursor-pointer"
                   >
                     Lanjut ke pembayaran ↗
                   </button>
@@ -233,7 +233,7 @@ export default function CheckoutModal({
 
                   <button
                     type="submit"
-                    className="px-7 py-3 rounded-full text-xs font-semibold text-[#081822] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 transition-all shadow-sm cursor-pointer"
+                    className="px-7 py-3 rounded-full text-xs font-semibold text-[#0D2B24] bg-[#34D399] hover:bg-[#2bc28a] active:scale-95 transition-all shadow-md cursor-pointer"
                   >
                     Buat Pesanan Demo (Rp {total.toLocaleString('id-ID')})
                   </button>
@@ -277,7 +277,7 @@ export default function CheckoutModal({
 
             <button
               onClick={onClose}
-              className="px-7 py-2.5 rounded-full text-xs font-semibold text-[#091a24] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 transition-all cursor-pointer"
+              className="px-7 py-2.5 rounded-full text-xs font-semibold text-[#0D2B24] bg-[#34D399] hover:bg-[#2bc28a] active:scale-95 transition-all shadow-md cursor-pointer"
             >
               Lanjutkan Berbelanja
             </button>

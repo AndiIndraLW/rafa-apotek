@@ -10,7 +10,11 @@ export default function Footer() {
         isExternal: true,
       },
       { name: 'Obat Bebas & Vitamin', href: '#products' },
-      { name: 'Konsultasi Apoteker', href: '#layanan' },
+      {
+        name: 'Konsultasi Apoteker',
+        href: 'https://wa.me/6282338611163?text=Halo%20Rafa%20Apotek,%20saya%20ingin%20konsultasi.',
+        isExternal: true,
+      },
       { name: 'Peracikan Farmasi', href: '#products' },
     ],
     kategori: [
@@ -28,21 +32,21 @@ export default function Footer() {
   };
 
   return (
-    <footer data-theme="dark" className="relative bg-[#08141d] text-white pt-16 md:pt-20 pb-4 overflow-hidden border-t border-white/[0.03]">
+    <footer data-theme="dark" className="relative bg-[#0A231C] text-white pt-16 md:pt-20 pb-4 overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16">
           {/* Brand & Info */}
           <div className="md:col-span-5 lg:col-span-4">
             <a href="#" className="flex items-center gap-2.5 group">
-              <div className="w-5 h-5 rounded-md bg-[#6ae7b8] flex items-center justify-center text-[#091f2c]">
+              <div className="w-6 h-6 rounded-md bg-[#059669] flex items-center justify-center text-white">
                 <Plus className="w-3.5 h-3.5 stroke-[3]" />
               </div>
-              <span className="text-white text-base font-medium tracking-tight">
+              <span className="text-white text-base font-semibold tracking-tight">
                 Rafa Apotek
               </span>
             </a>
 
-            <p className="mt-4 text-slate-400 text-xs font-light leading-relaxed max-w-xs">
+            <p className="mt-4 text-emerald-100/70 text-xs font-light leading-relaxed max-w-xs">
               Apotek resmi penyedia obat bebas, obat resep dokter, peracikan farmasi, dan suplemen kesehatan keluarga berizin resmi Kemenkes RI.
             </p>
 
@@ -175,9 +179,14 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Massive Ambient Rafa Apotek Wordmark */}
-      <div className="w-full flex justify-center pointer-events-none select-none opacity-25 translate-y-3">
-        <span className="font-serif text-[18vw] leading-none text-[#1b3547] tracking-tight">
+      {/* Massive Ambient Wordmark Below Copyright */}
+      <div className="w-full flex justify-center pointer-events-none select-none opacity-20 translate-y-3 overflow-hidden">
+        {/* Desktop Version: Rafa Apotek */}
+        <span className="hidden md:block font-display text-[12vw] leading-none text-emerald-950 tracking-tight whitespace-nowrap text-center">
+          Rafa Apotek
+        </span>
+        {/* Mobile Version: Rafa */}
+        <span className="block md:hidden font-display text-[22vw] leading-none text-emerald-950 tracking-tight whitespace-nowrap text-center">
           Rafa
         </span>
       </div>
