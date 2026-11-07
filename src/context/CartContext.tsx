@@ -27,23 +27,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cartOpen, setCartOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      number: '01',
-      category: 'PEREMAJAAN SEL',
-      categorySlug: 'peptida',
-      title: 'Tinktur Pembaruan Seluler & Peptida',
-      price: 'Rp 640.000',
-      priceNumber: 640000,
-      image: '/images/service-2.png',
-      alt: 'Botol kaca amber obat peracikan apotek klinis',
-      size: 'Botol Kaca Amber Pipet 50ml',
-      ingredients: ['Peptida Bioidentik', 'Adaptogen Alami'],
-      indication: 'Mendukung regenerasi jaringan seluler',
-      dosage: '1 pipet (1ml) per hari',
-      quantity: 1,
-    },
-  ]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   // Load from localStorage on mount
   useEffect(() => {
