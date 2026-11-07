@@ -3,9 +3,11 @@
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Search,
   ShoppingBag,
+  Plus,
   ShieldCheck,
   ArrowUpRight,
   Sparkles,
@@ -32,6 +34,7 @@ const CATEGORIES = [
 ] as const;
 
 export default function KatalogObatPage() {
+  const router = useRouter();
   const { addToCart } = useCart();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('semua');
@@ -294,7 +297,7 @@ export default function KatalogObatPage() {
               {filteredProducts.map((product) => (
                 <div
                   key={product.number}
-                  onClick={() => addToCart(product)}
+                  onClick={() => router.push(`/produk/${product.slug}`)}
                   className="bg-white rounded-2xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-black/[0.03] flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative"
                 >
                   <div>
@@ -346,13 +349,21 @@ export default function KatalogObatPage() {
                       {product.price}
                     </span>
 
-                    <div className="flex items-center gap-1 text-[11px] text-emerald-900 font-semibold group-hover:underline">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
+                      className="flex items-center gap-1 text-[11px] text-emerald-900 font-semibold group-hover:underline cursor-pointer"
+                      aria-label={`Tambah ${product.title} ke keranjang`}
+                    >
                       <span className="hidden xl:inline">Tambah</span>
                       <span className="xl:hidden">+ Keranjang</span>
                       <div className="w-6 h-6 rounded-full bg-[#091f2c]/5 group-hover:bg-[#091f2c] group-hover:text-white transition-all flex items-center justify-center text-slate-700 ml-1">
-                        <ShoppingBag className="w-3 h-3" />
+                        <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                       </div>
-                    </div>
+                    </button>
                   </div>
                 </div>
               ))}

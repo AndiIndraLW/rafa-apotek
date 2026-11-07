@@ -1,5 +1,6 @@
 export interface ProductDetail {
   number: string;
+  slug: string;
   category: string;
   categorySlug: 'resep' | 'metabolik' | 'imunitas' | 'peptida' | 'pencernaan' | 'tidur';
   title: string;
@@ -10,13 +11,18 @@ export interface ProductDetail {
   size: string;
   ingredients: string[];
   indication: string;
+  description: string;
   dosage: string;
-  prescriptionRequired?: boolean;
+  dosageInstructions: string;
+  prescriptionRequired: boolean;
+  storage: string;
+  bpomNumber?: string;
 }
 
 export const PRODUCTS_DATA: ProductDetail[] = [
   {
     number: '01',
+    slug: 'tinktur-pembaruan-seluler-peptida',
     category: 'PEREMAJAAN SEL',
     categorySlug: 'peptida',
     title: 'Tinktur Pembaruan Seluler & Peptida',
@@ -27,11 +33,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: 'Botol Kaca Amber Pipet 50ml',
     ingredients: ['Peptida Bioidentik', 'Adaptogen Alami', 'Kofaktor Seluler', 'Vitamin D3/K2'],
     indication: 'Mendukung regenerasi jaringan seluler dan vitalitas jangka panjang',
+    description: 'Tinktur formulasi farmasi klinis khusus yang memadukan peptida bioidentik dengan kofaktor seluler esensial. Dirancang untuk mempercepat regenerasi sel, memulihkan energi mitokondria, dan menjaga kekencangan serta daya tahan sel dari stres oksidatif harian.',
     dosage: '1 pipet (1ml) per hari di bawah lidah pada pagi hari',
+    dosageInstructions: 'Teteskan 1 pipet (1ml) tepat di bawah lidah (sublingual), tahan selama 30–60 detik sebelum ditelan agar zat aktif terserap langsung ke pembuluh darah kapiler. Dianjurkan diminum pada pagi hari saat perut kosong.',
     prescriptionRequired: false,
+    storage: 'Simpan di tempat kering dan sejuk (suhu 15°C–25°C), terlindung dari paparan sinar matahari langsung.',
+    bpomNumber: 'POM SD 211548901',
   },
   {
     number: '02',
+    slug: 'sistem-keseimbangan-metabolik-harian',
     category: 'VITALITAS METABOLIK',
     categorySlug: 'metabolik',
     title: 'Sistem Keseimbangan Metabolik Harian',
@@ -42,11 +53,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: '60 Kapsul Nabati (30 Hari)',
     ingredients: ['Berberin Fitosom', 'Asam Alfa Lipoat', 'Kromium Pikolinat', 'Koenzim Q10 Ubikuinol'],
     indication: 'Menjaga stabilitas gula darah, sensitivitas insulin, dan metabolisme lipid',
+    description: 'Kombinasi Berberin Fitosom bioavailabilitas tinggi dengan Ubiquinol Q10 dan Asam Alfa Lipoat. Berfungsi mengoptimalkan jalur AMPK metabolik tubuh, membantu pengendalian lonjakan glukosa pasca makan, serta mendukung pemecahan lemak dan profil kolesterol sehat.',
     dosage: '1 kapsul diminum 15 menit sebelum makan berat',
+    dosageInstructions: 'Minum 1 kapsul 2 kali sehari, kira-kira 15 menit sebelum makan siang dan makan malam bersama segelas air putih. Telan kapsul secara utuh tanpa dibuka.',
     prescriptionRequired: false,
+    storage: 'Simpan dalam wadah tertutup rapat pada suhu kamar di bawah 30°C dan kering.',
+    bpomNumber: 'POM TR 193325141',
   },
   {
     number: '03',
+    slug: 'paket-telekonsultasi-resep-obat',
     category: 'TELEMEDISIN & RESEP',
     categorySlug: 'resep',
     title: 'Paket Telekonsultasi & Resep Obat',
@@ -57,11 +73,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: 'Paket Perawatan 30 Hari',
     ingredients: ['Konsultasi Dokter Spesialis', 'Peracikan Farmasi Personal', 'Tinjauan Hasil Lab', 'Pengiriman Suhu Terjaga'],
     indication: 'Layanan terpadu peracikan obat resep khusus dokter dengan pengawasan apoteker',
+    description: 'Layanan farmasi eksklusif untuk penebusan dan peracikan obat resep dokter. Tim apoteker berizin Rafa Apotek akan memverifikasi legalitas resep, dosis terapeutik, potensi kontraindikasi, serta meracik obat secara personal di fasilitas steril berstandar cGMP.',
     dosage: 'Sesuai instruksi etiket farmasi dan protokol dokter',
+    dosageInstructions: 'Gunakan obat tepat sesuai aturan pakai yang tertera pada etiket farmasi dan buku panduan terapi dari apoteker pendamping Anda. Jangan menghentikan atau mengganti dosis tanpa konfirmasi dokter.',
     prescriptionRequired: true,
+    storage: 'Sesuai instruksi khusus pada label etiket obat (sebagian memerlukan penyimpanan kulkas 2°C–8°C).',
+    bpomNumber: 'Izin Apotek No. 442/019/SIPA/2024',
   },
   {
     number: '04',
+    slug: 'kompleks-umur-panjang-seluler-nad',
     category: 'KESEHATAN MITOKONDRIA',
     categorySlug: 'metabolik',
     title: 'Kompleks Umur Panjang Seluler NAD+',
@@ -72,11 +93,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: 'Pipet Sublingual 30 Hari',
     ingredients: ['NAD+ Liposomal', 'Resveratrol', 'Quercetin Fitosom', 'Apigenin'],
     indication: 'Mengoptimalkan bioenergi mitokondria, perbaikan DNA, dan ketahanan fisik',
+    description: 'Formula mutakhir peremajaan seluler yang mengintegrasikan koenzim NAD+ Liposomal murni dengan aktivator sirtuin alami (Resveratrol & Quercetin). Membantu membalikkan penurunan kadar NAD+ akibat penuaan, memacu perbaikan DNA intraseluler, serta meningkatkan kejernihan mental (*brain fog reduction*).',
     dosage: '1 dosis harian di bawah lidah sebelum sarapan',
+    dosageInstructions: 'Kocok perlahan sebelum digunakan. Ambil 1 pipet penuh (sekitar 1ml), tahan di bawah lidah selama minimal 45 detik sebelum ditelan. Gunakan pagi hari saat perut kosong.',
     prescriptionRequired: false,
+    storage: 'Setelah dibuka, simpan di dalam lemari pendingin (suhu 2°C–8°C) untuk menjaga stabilitas molekul aktif.',
+    bpomNumber: 'POM SI 204511291',
   },
   {
     number: '05',
+    slug: 'eliksir-pendukung-hormon-bioidentik',
     category: 'KESEIMBANGAN HORMON',
     categorySlug: 'peptida',
     title: 'Eliksir Pendukung Hormon Bioidentik',
@@ -87,11 +113,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: 'Tinktur Oral 60ml',
     ingredients: ['Ashwagandha KSM-66', 'Ekstrak Akar Maca', 'DIM Alami', 'Seng Glisinat'],
     indication: 'Membantu menyeimbangkan regulasi endokrin, suasana hati, dan energi stabil',
+    description: 'Eliksir adaptogenik murni yang dirancang untuk mendukung poros aksis hipotalamus-hipofisis-adrenal (HPA). Membantu menstabilkan fluktuasi hormon estrogen, progesteron, dan testosteron alami tubuh tanpa intervensi sintetis yang agresif.',
     dosage: '20 tetes di dalam segelas air hangat di pagi hari',
+    dosageInstructions: 'Teteskan 20 tetes cairan eliksir ke dalam 150ml air hangat atau teh herbal pagi. Aduk rata dan minum perlahan sebelum sarapan.',
     prescriptionRequired: false,
+    storage: 'Simpan pada suhu ruang (15°C–28°C), hindari kelembapan tinggi dan jangkauan anak-anak.',
+    bpomNumber: 'POM TR 226019881',
   },
   {
     number: '06',
+    slug: 'paket-pemulihan-tidur-reset-kortisol',
     category: 'SIRKADIAN & TIDUR',
     categorySlug: 'tidur',
     title: 'Paket Pemulihan Tidur & Reset Kortisol',
@@ -102,11 +133,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: '30 Saset Malam',
     ingredients: ['Magnesium L-Treonat', 'L-Teanin', 'GABA Alami', 'Ekstrak Apigenin'],
     indication: 'Meningkatkan kualitas deep sleep, memulihkan ritme sirkadian dan relaksasi sistem saraf',
+    description: 'Formula sirkadian malam berbasis mineral neurologis Magnesium L-Threonate (satu-satunya bentuk magnesium yang mampu menembus sawar darah-otak) dipadukan dengan L-Theanine murni. Membantu menurunkan gelombang otak yang hiperaktif, menormalkan hormon stres kortisol, dan menghasilkan tidur lelap berkualitas restoratif tanpa rasa kantuk berlebih di pagi hari.',
     dosage: '1 saset dilarutkan dalam 150ml air hangat 45 menit sebelum tidur',
+    dosageInstructions: 'Larutkan 1 saset ke dalam 150ml air hangat, aduk hingga rata, lalu minum 30–45 menit sebelum jadwal tidur malam Anda. Hindari penggunaan layar gawai (*blue light*) setelah meminum formula ini.',
     prescriptionRequired: false,
+    storage: 'Simpan saset dalam kemasan aslinya di tempat kering dan sejuk di bawah 28°C.',
+    bpomNumber: 'POM SD 235129031',
   },
   {
     number: '07',
+    slug: 'serum-peptida-aktif-peremajaan-kulit',
     category: 'TERAPI PEPTIDA',
     categorySlug: 'peptida',
     title: 'Serum Peptida Aktif & Peremajaan Kulit',
@@ -117,11 +153,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: 'Botol Pipet 30ml',
     ingredients: ['GHK-Cu Copper Peptides', 'Kompleks Asam Hialuronat', 'Ceramide NP/AP', 'Squalane Murni'],
     indication: 'Regenerasi matriks ekstraseluler kulit, produksi kolagen, dan perbaikan sawar kulit',
+    description: 'Serum kosmeseutikal medis dengan konsentrasi murni GHK-Cu Copper Tripeptide-1. Terbukti secara klinis menstimulasi sintesis pro-kolagen tipe I dan III, memperbaiki elastisitas jaringan kulit yang menipis, memudarkan garis halus, serta memperkuat lapisan pertahanan sawar kulit (*skin barrier*).',
     dosage: 'Oleskan 3-4 tetes merata pada kulit bersih pagi dan malam',
+    dosageInstructions: 'Setelah membersihkan wajah dan mengaplikasikan toner, teteskan 3–4 tetes serum ke telapak tangan atau langsung ke area wajah dan leher. Tepuk-tepuk lembut hingga terserap sempurna. Hindari penggunaan bersamaan dengan produk asam kuat (seperti Vitamin C murni konsentrasi tinggi atau AHA/BHA kuat).',
     prescriptionRequired: false,
+    storage: 'Simpan pada suhu ruangan terkontrol (20°C–25°C), jauhkan dari panas langsung untuk menjaga integritas ikatan tembaga peptida.',
+    bpomNumber: 'NA 18230109921',
   },
   {
     number: '08',
+    slug: 'formula-perlindungan-kardiovaskular-endotel',
     category: 'KARDIOVASKULAR',
     categorySlug: 'metabolik',
     title: 'Formula Perlindungan Kardiovaskular & Endotel',
@@ -132,11 +173,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: '90 Kapsul Nabati',
     ingredients: ['Ekstrak Bit Terfermentasi', 'L-Sitrulin', 'Polifenol Biji Anggur', 'Vitamin K2 (MK-7)'],
     indication: 'Mendukung elastisitas pembuluh darah, aliran nitrat oksida, dan tekanan darah sehat',
+    description: 'Suplemen kardioprotektif sinergis yang diformulasikan untuk meningkatkan bioavailabilitas Nitric Oxide (NO) di dinding endotel pembuluh darah. Membantu menjaga elastisitas arteri, melancarkan sirkulasi mikrovaskular ke organ vital, dan memelihara tekanan darah dalam rentang normal.',
     dosage: '2 kapsul sehari setelah makan pagi',
+    dosageInstructions: 'Konsumsi 2 kapsul sekaligus bersama sarapan pagi atau makan siang. Minum dengan air putih yang cukup sepanjang hari.',
     prescriptionRequired: false,
+    storage: 'Simpan di tempat kering dan bersuhu di bawah 30°C, hindari tempat lembap.',
+    bpomNumber: 'POM SD 211390451',
   },
   {
     number: '09',
+    slug: 'infusi-elektrolit-mikronutrien-alami',
     category: 'HIDRASI SELULER',
     categorySlug: 'imunitas',
     title: 'Infusi Elektrolit & Mikronutrien Alami',
@@ -147,11 +193,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: '30 Saset Praktis',
     ingredients: ['Garam Himalaya Murni', 'Kalium Sitrat', 'Magnesium Malat', 'Kompleks Asam Fulvat'],
     indication: 'Rehidrasi intraseluler cepat tanpa gula berlebih, memulihkan ion tubuh aktif',
+    description: 'Serbuk hidrasi seluler farmasi murni tanpa tambahan gula sukrosa atau pemanis buatan berlebih. Mengandung rasio elektrolit esensial natrium, kalium, dan magnesium yang seimbang dengan mineral kelat asam fulvat untuk memfasilitasi penyerapan air langsung ke dalam sel tubuh.',
     dosage: '1 saset dicampur dengan 500ml air dingin saat beraktivitas',
+    dosageInstructions: 'Tuangkan 1 saset ke dalam botol minum berisi 500ml–600ml air dingin atau suhu ruang. Kocok hingga larut sepenuhnya. Baik dikonsumsi di pagi hari saat baru bangun atau selama sesi olahraga.',
     prescriptionRequired: false,
+    storage: 'Simpan dalam suhu ruang sejuk dan kering. Jangan biarkan saset terbuka terpapar udara lama.',
+    bpomNumber: 'POM MD 867031021',
   },
   {
     number: '10',
+    slug: 'probiotik-multi-galur-enzim-pencernaan',
     category: 'KESEHATAN PENCERNAAN',
     categorySlug: 'pencernaan',
     title: 'Probiotik Multi-Galur & Enzim Pencernaan',
@@ -162,11 +213,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: '60 Kapsul Salut Enterik',
     ingredients: ['10 Galur Probiotik Aktif', 'Prebiotik FOS Alami', 'Kompleks Enzim Digestif', 'Seng Karnosin'],
     indication: 'Mendukung mikrobioma usus, penyerapan nutrisi maksimal, dan kenyamanan lambung',
+    description: 'Formula sinbiotik klinis yang menggabungkan 10 galur bakteri baik teruji (50 Miliar CFU) dengan pelindung kapsul salut enterik tahan asam lambung. Dilengkapi enzim pencernaan lengkap dan Zinc Carnosine untuk mempercepat regenerasi mukosa lambung dan dinding saluran cerna.',
     dosage: '1 kapsul saat perut kosong di pagi hari atau sebelum tidur',
+    dosageInstructions: 'Minum 1 kapsul dengan segelas air bersuhu ruang saat perut kosong (minimal 30 menit sebelum makan pagi atau 2 jam setelah makan malam sebelum tidur). Jangan diminum bersama air panas.',
     prescriptionRequired: false,
+    storage: 'Dianjurkan disimpan dalam kulkas (2°C–8°C) setelah segel dibuka untuk mempertahankan viabilitas kultur probiotik.',
+    bpomNumber: 'POM SI 223019841',
   },
   {
     number: '11',
+    slug: 'kompleks-vitamin-c-liposomal-glutathione',
     category: 'IMUNITAS & ANTIOKSIDAN',
     categorySlug: 'imunitas',
     title: 'Kompleks Vitamin C Liposomal & Glutathione',
@@ -177,11 +233,16 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: 'Botol Cairan Liposomal 250ml',
     ingredients: ['Glutation Tereduksi Setria', 'Vitamin C Liposomal Murni', 'Seng Pikolinat Bioaktif', 'Bioflavonoid Sitrus'],
     indication: 'Perlindungan antioksidan seluler ganda dan penguatan imunitas sistemik',
+    description: 'Kombinasi antioksidan master Glutation Tereduksi (Setria) dan Vitamin C berkapsul liposom fosfolipid. Teknologi enkapsulasi liposomal melindungi zat aktif dari kerusakan asam lambung, menghasilkan penyerapan intraseluler hingga 10 kali lipat lebih efektif dibandingkan suplemen tablet biasa.',
     dosage: '1 sendok takar (5ml) per hari, diminum langsung atau dicampur jus',
+    dosageInstructions: 'Kocok lembut botol sebelum dituang. Minum 1 sendok takar (5ml) langsung atau campurkan ke dalam segelas air dingin atau jus buah segar. Jangan diaduk dengan blender berkecepatan tinggi.',
     prescriptionRequired: false,
+    storage: 'Simpan di tempat dingin dan kering. Segera masukkan ke lemari pendingin (2°C–8°C) setelah dibuka.',
+    bpomNumber: 'POM SI 214612301',
   },
   {
     number: '12',
+    slug: 'formula-peptida-kolagen-bioaktif-sendi',
     category: 'SENDI & TULANG',
     categorySlug: 'pencernaan',
     title: 'Formula Peptida Kolagen Bioaktif & Sendi',
@@ -192,7 +253,11 @@ export const PRODUCTS_DATA: ProductDetail[] = [
     size: 'Serbuk Peptida Kolagen 300g',
     ingredients: ['Kolagen Tipe I & II Terhidrolisis', 'Glukosamin Sulfat Farmasi', 'MSM Murni', 'Asam Hialuronat Oral'],
     indication: 'Menjaga fleksibilitas tulang rawan, cairan sendi, dan kepadatan matriks tulang',
+    description: 'Serbuk peptida kolagen bioaktif dengan berat molekul rendah (< 2.000 Dalton) yang cepat diserap tubuh. Diperkaya Glukosamin farmasi murni, MSM, dan Asam Hialuronat untuk merangsang produksi cairan sinovial alami sendi, mengurangi rasa kaku, dan memulihkan mobilitas persendian.',
     dosage: '1 sendok takar (10g) dilarutkan dalam air hangat atau smoothie harian',
+    dosageInstructions: 'Larutkan 1 sendok takar peres (sekitar 10 gram) ke dalam 200ml air hangat, kopi, susu, atau smoothie. Aduk hingga larut sempurna. Dapat dikonsumsi setiap pagi hari secara teratur.',
     prescriptionRequired: false,
+    storage: 'Tutup rapat kembali wadah setelah digunakan. Simpan pada suhu ruang kering di bawah 30°C.',
+    bpomNumber: 'POM SD 232145901',
   },
 ];

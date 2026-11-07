@@ -57,20 +57,32 @@ export default function Hero({ onOpenAssessment, onOpenVideo }: HeroProps) {
             </div>
           </div>
 
-          {/* Right Column: Hero Portrait */}
+          {/* Right Column: Hero Pharmacy Image with Atmospheric Vignette matching #0e2334 */}
           <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[480px] lg:max-w-none aspect-[4/5] sm:aspect-[3/4] lg:aspect-[790/930]">
+            <div className="relative w-full max-w-[480px] lg:max-w-none aspect-[4/5] sm:aspect-[3/4] lg:aspect-[790/930] rounded-3xl overflow-hidden">
               <Image
-                src="/images/hero-portrait.png"
-                alt="Pasien Rafa Apotek mendapatkan obat asli dan layanan konsultasi apoteker"
+                src="/images/apotek.jpg"
+                alt="Apotek Rafa Apotek melayani kebutuhan obat asli dan konsultasi apoteker"
                 fill
                 priority
-                className="object-cover object-center rounded-2xl lg:rounded-none"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              {/* Soft overlay gradients to blend into background */}
-              <div className="hidden lg:block absolute inset-0 pointer-events-none bg-gradient-to-r from-[#0e2334] via-transparent to-transparent w-24"></div>
-              <div className="hidden lg:block absolute inset-0 pointer-events-none bg-gradient-to-t from-[#0e2334] via-transparent to-transparent h-24 top-auto"></div>
+
+              {/* Radial Vignette Effect matching background #0e2334 */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(ellipse at center, transparent 30%, rgba(14, 35, 52, 0.4) 60%, rgba(14, 35, 52, 0.95) 100%)',
+                }}
+              />
+
+              {/* Edge Blends matching background #0e2334 */}
+              <div className="absolute inset-y-0 left-0 w-20 sm:w-28 pointer-events-none bg-gradient-to-r from-[#0e2334] via-[#0e2334]/50 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-24 sm:h-36 pointer-events-none bg-gradient-to-t from-[#0e2334] via-[#0e2334]/70 to-transparent" />
+              <div className="absolute inset-x-0 top-0 h-16 sm:h-20 pointer-events-none bg-gradient-to-b from-[#0e2334]/70 to-transparent" />
+              <div className="absolute inset-y-0 right-0 w-14 sm:w-20 pointer-events-none bg-gradient-to-l from-[#0e2334]/80 to-transparent" />
             </div>
           </div>
 

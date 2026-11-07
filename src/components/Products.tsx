@@ -3,7 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, ShoppingBag } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ArrowUpRight, Plus } from 'lucide-react';
 import { PRODUCTS_DATA, ProductDetail } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 
@@ -15,6 +16,7 @@ interface ProductsProps {
 }
 
 export default function Products({ onAddToCart }: ProductsProps) {
+  const router = useRouter();
   const cart = useCart();
   const handleAddToCart = onAddToCart || ((product: ProductDetail) => cart.addToCart(product));
 
@@ -54,7 +56,7 @@ export default function Products({ onAddToCart }: ProductsProps) {
           {PRODUCTS_DATA.map((product) => (
             <div
               key={product.number}
-              onClick={() => handleAddToCart(product)}
+              onClick={() => router.push(`/produk/${product.slug}`)}
               className="bg-white rounded-2xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-black/[0.03] flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative"
             >
               <div>
@@ -71,6 +73,13 @@ export default function Products({ onAddToCart }: ProductsProps) {
                   <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md text-[#091f2c] font-semibold text-[11px] shadow-sm">
                     {product.price}
                   </div>
+
+                  {/* Kategori 2: Resep Dokter Pill */}
+                  {product.prescriptionRequired && (
+                    <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-rose-600/90 text-white font-mono text-[9px] font-bold shadow-xs">
+                      RESEP DOKTER
+                    </div>
+                  )}
                 </div>
 
                 {/* Category Tag */}
@@ -92,13 +101,21 @@ export default function Products({ onAddToCart }: ProductsProps) {
                   {product.price}
                 </span>
 
-                <div className="flex items-center gap-1 text-[11px] text-emerald-900 font-semibold group-hover:underline">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleAddToCart(product);
+                  }}
+                  className="flex items-center gap-1 text-[11px] text-emerald-900 font-semibold group-hover:underline cursor-pointer"
+                  aria-label={`Tambah ${product.title} ke keranjang`}
+                >
                   <span className="hidden xl:inline">Tambah</span>
                   <span className="xl:hidden">+ Keranjang</span>
                   <div className="w-6 h-6 rounded-full bg-[#091f2c]/5 group-hover:bg-[#091f2c] group-hover:text-white transition-all flex items-center justify-center text-slate-700 ml-1">
-                    <ShoppingBag className="w-3 h-3" />
+                    <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
-                </div>
+                </button>
               </div>
             </div>
           ))}
