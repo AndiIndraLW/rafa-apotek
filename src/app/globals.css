@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'PP Museum';
+  src: url('/Fonts/ppmuseum-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Museum';
+  src: url('/Fonts/ppmuseum-lightitalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Museum';
+  src: url('/Fonts/ppmuseum-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Museum';
+  src: url('/Fonts/ppmuseum-regularitalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Museum';
+  src: url('/Fonts/ppmuseum-ultrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Museum';
+  src: url('/Fonts/ppmuseum-ultrabolditalic.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0e2334;
+    color: #f1f5f9;
+  }
+
+  ::selection {
+    background-color: #5ff39d;
+    color: #09161e;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-pp-museum), 'PP Museum', Georgia, Cambria, 'Times New Roman', serif;
+}
+
+.font-sans {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
