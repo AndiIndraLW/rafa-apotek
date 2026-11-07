@@ -12,15 +12,15 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState<{
-    goals: string[];
-    symptoms: string[];
-    timeline: string;
-    email: string;
+    kategori: string[];
+    kondisi: string[];
+    waktu: string;
+    kontak: string;
   }>({
-    goals: [],
-    symptoms: [],
-    timeline: '',
-    email: '',
+    kategori: [],
+    kondisi: [],
+    waktu: '',
+    kontak: '',
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -41,14 +41,12 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
     }
   }, [isOpen]);
 
-  const toggleSelection = (category: 'goals' | 'symptoms', item: string) => {
+  const toggleSelection = (field: 'kategori' | 'kondisi', item: string) => {
     setAnswers((prev) => {
-      const exists = prev[category].includes(item);
+      const exists = prev[field].includes(item);
       return {
         ...prev,
-        [category]: exists
-          ? prev[category].filter((i) => i !== item)
-          : [...prev[category], item],
+        [field]: exists ? prev[field].filter((i) => i !== item) : [...prev[field], item],
       };
     });
   };
@@ -72,7 +70,7 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
     setTimeout(() => {
       setCurrentStep(1);
       setSubmitted(false);
-      setAnswers({ goals: [], symptoms: [], timeline: '', email: '' });
+      setAnswers({ kategori: [], kondisi: [], waktu: '', kontak: '' });
     }, 300);
   };
 
@@ -86,8 +84,8 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
         {/* Close Button */}
         <button
           onClick={resetAndClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
-          aria-label="Close assessment"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer"
+          aria-label="Tutup formulir"
         >
           <X className="w-4 h-4" />
         </button>
@@ -97,8 +95,8 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
             {/* Header & Step progress */}
             <div className="mb-6">
               <div className="flex items-center justify-between text-xs text-emerald-400 font-mono mb-2">
-                <span>STEP {currentStep} OF 4</span>
-                <span>{Math.round((currentStep / 4) * 100)}% COMPLETE</span>
+                <span>LANGKAH {currentStep} DARI 4 • RAFA APOTEK</span>
+                <span>{Math.round((currentStep / 4) * 100)}% SELESAI</span>
               </div>
               <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden">
                 <div
@@ -108,38 +106,38 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
               </div>
             </div>
 
-            {/* Step 1: Health Goals */}
+            {/* Step 1: Kategori Kebutuhan */}
             {currentStep === 1 && (
               <div className="animate-in fade-in duration-300">
                 <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-2">
-                  What health outcomes are you seeking?
+                  Layanan obat apa yang Anda butuhkan?
                 </h3>
                 <p className="text-slate-300 text-xs sm:text-sm font-light mb-6">
-                  Select all that align with your current longevity and wellness priorities.
+                  Pilih opsi yang sesuai agar apoteker kami dapat segera menyiapkan kebutuhan Anda.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                   {[
-                    'Metabolic health & energy',
-                    'Hormonal balance',
-                    'Deep, restorative sleep',
-                    'Cardiovascular longevity',
-                    'Mental clarity & focus',
-                    'Personalized pharmacy plan',
-                  ].map((goal) => {
-                    const isSelected = answers.goals.includes(goal);
+                    'Tebus Resep Dokter Resmi',
+                    'Obat Rutin Kronis',
+                    'Vitamin & Suplemen Imunitas',
+                    'Obat Flu, Batuk & Demam',
+                    'Kesehatan Lambung / Maag',
+                    'Tanya / Rekomendasi Apoteker',
+                  ].map((item) => {
+                    const isSelected = answers.kategori.includes(item);
                     return (
                       <button
-                        key={goal}
+                        key={item}
                         type="button"
-                        onClick={() => toggleSelection('goals', goal)}
-                        className={`text-left p-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between ${
+                        onClick={() => toggleSelection('kategori', item)}
+                        className={`text-left p-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${
                           isSelected
                             ? 'bg-[#5beba6]/15 border-[#5beba6] text-white font-medium'
                             : 'bg-white/[0.03] border-white/10 text-slate-300 hover:bg-white/[0.06]'
                         }`}
                       >
-                        <span>{goal}</span>
+                        <span>{item}</span>
                         {isSelected && <Check className="w-4 h-4 text-emerald-400 ml-2" />}
                       </button>
                     );
@@ -148,38 +146,38 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
               </div>
             )}
 
-            {/* Step 2: Current Symptoms */}
+            {/* Step 2: Riwayat Alergi / Kondisi Pasien */}
             {currentStep === 2 && (
               <div className="animate-in fade-in duration-300">
                 <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-2">
-                  What have you been experiencing lately?
+                  Apakah ada riwayat alergi obat?
                 </h3>
                 <p className="text-slate-300 text-xs sm:text-sm font-light mb-6">
-                  This helps our clinical team tailor diagnostic lab work to your baseline.
+                  Informasi ini sangat penting untuk keselamatan konsumsi dan pencegahan kontraindikasi.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                   {[
-                    'Afternoon energy dips',
-                    'Difficulty staying asleep',
-                    'Brain fog or slow recall',
-                    'Stubborn weight changes',
-                    'Mood or stress fluctuations',
-                    'Just looking for proactive care',
-                  ].map((symptom) => {
-                    const isSelected = answers.symptoms.includes(symptom);
+                    'Tidak ada riwayat alergi obat',
+                    'Alergi obat golongan penisilin',
+                    'Alergi obat pereda nyeri (NSAID)',
+                    'Memiliki riwayat maag / GERD',
+                    'Sedang hamil / menyusui',
+                    'Pasien anak-anak atau lansia',
+                  ].map((item) => {
+                    const isSelected = answers.kondisi.includes(item);
                     return (
                       <button
-                        key={symptom}
+                        key={item}
                         type="button"
-                        onClick={() => toggleSelection('symptoms', symptom)}
-                        className={`text-left p-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between ${
+                        onClick={() => toggleSelection('kondisi', item)}
+                        className={`text-left p-3.5 rounded-xl border text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer ${
                           isSelected
                             ? 'bg-[#5beba6]/15 border-[#5beba6] text-white font-medium'
                             : 'bg-white/[0.03] border-white/10 text-slate-300 hover:bg-white/[0.06]'
                         }`}
                       >
-                        <span>{symptom}</span>
+                        <span>{item}</span>
                         {isSelected && <Check className="w-4 h-4 text-emerald-400 ml-2" />}
                       </button>
                     );
@@ -188,29 +186,29 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
               </div>
             )}
 
-            {/* Step 3: Desired Timeline */}
+            {/* Step 3: Waktu Pengiriman */}
             {currentStep === 3 && (
               <div className="animate-in fade-in duration-300">
                 <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-2">
-                  When would you like to speak with a clinician?
+                  Kapan Anda memerlukan obat ini?
                 </h3>
                 <p className="text-slate-300 text-xs sm:text-sm font-light mb-6">
-                  We have telehealth providers licensed across 40 states available every week.
+                  Rafa Apotek siap melayani pengiriman langsung ke alamat Anda.
                 </p>
 
                 <div className="space-y-3 mb-8">
                   {[
-                    { title: 'This week', desc: 'Fast-tracked video consultation and initial lab panel' },
-                    { title: 'Next 2–3 weeks', desc: 'Convenient scheduling around your routine' },
-                    { title: 'Exploring options', desc: 'Review clinician matching and pharmacy pricing first' },
+                    { title: 'Segera (Pengiriman Instan)', desc: 'Obat disiapkan dan dikirimkan langsung dalam 1–2 jam' },
+                    { title: 'Hari Ini (Pengiriman Reguler Same-Day)', desc: 'Pengiriman di hari yang sama untuk kenyamanan Anda' },
+                    { title: 'Konsultasi Resep Terlebih Dahulu', desc: 'Apoteker akan menghubungi Anda untuk konfirmasi obat & dosis' },
                   ].map((item) => {
-                    const isSelected = answers.timeline === item.title;
+                    const isSelected = answers.waktu === item.title;
                     return (
                       <button
                         key={item.title}
                         type="button"
-                        onClick={() => setAnswers({ ...answers, timeline: item.title })}
-                        className={`w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between ${
+                        onClick={() => setAnswers({ ...answers, waktu: item.title })}
+                        className={`w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between cursor-pointer ${
                           isSelected
                             ? 'bg-[#5beba6]/15 border-[#5beba6] text-white'
                             : 'bg-white/[0.03] border-white/10 text-slate-300 hover:bg-white/[0.06]'
@@ -228,32 +226,32 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
               </div>
             )}
 
-            {/* Step 4: Contact & Review */}
+            {/* Step 4: Kontak WhatsApp / Email */}
             {currentStep === 4 && (
               <div className="animate-in fade-in duration-300">
                 <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal mb-2">
-                  Where should we send your care summary?
+                  Nomor WhatsApp untuk konfirmasi apoteker
                 </h3>
                 <p className="text-slate-300 text-xs sm:text-sm font-light mb-6">
-                  Dr. Amara Osei and our clinical team will review your profile and match you with a provider.
+                  Apoteker kami akan mengirimkan konfirmasi ketersediaan obat dan petunjuk aturan minum.
                 </p>
 
                 <div className="space-y-4 mb-8">
                   <div>
                     <label className="block text-xs font-mono uppercase text-slate-400 mb-1.5">
-                      Email Address
+                      Nomor WhatsApp Aktif
                     </label>
                     <input
-                      type="email"
-                      placeholder="you@domain.com"
-                      value={answers.email}
-                      onChange={(e) => setAnswers({ ...answers, email: e.target.value })}
+                      type="tel"
+                      placeholder="Contoh: 081234567890"
+                      value={answers.kontak}
+                      onChange={(e) => setAnswers({ ...answers, kontak: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 text-sm"
                     />
                   </div>
 
                   <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 text-xs text-slate-400 leading-relaxed">
-                    🔒 <strong className="text-slate-300">HIPAA Compliant</strong>: Your personal health information is strictly confidential, encrypted at rest and in transit.
+                    🔒 <strong className="text-slate-300">Jaminan Keamanan Farmasi</strong>: Seluruh resep dan data pasien tersimpan aman dan hanya digunakan untuk keperluan pelayanan kefarmasian resmi Rafa Apotek.
                   </div>
                 </div>
               </div>
@@ -265,10 +263,10 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-2 rounded-lg"
+                  className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-2 rounded-lg cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Back</span>
+                  <span>Kembali</span>
                 </button>
               ) : (
                 <div />
@@ -277,10 +275,10 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
               <button
                 type="button"
                 onClick={handleNext}
-                disabled={currentStep === 4 && !answers.email.includes('@')}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold text-[#081822] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                disabled={currentStep === 4 && answers.kontak.length < 9}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold text-[#081822] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
               >
-                <span>{currentStep === 4 ? 'Complete assessment' : 'Next'}</span>
+                <span>{currentStep === 4 ? 'Kirimkan ke Apoteker' : 'Lanjut'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -292,18 +290,17 @@ export default function AssessmentModal({ isOpen, onClose }: AssessmentModalProp
               <Sparkles className="w-7 h-7" />
             </div>
             <h3 className="font-serif text-3xl text-white font-normal mb-3">
-              Your care pathway is prepared.
+              Permintaan Obat Diterima!
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm font-light max-w-md mx-auto leading-relaxed mb-8">
-              We&apos;ve logged your assessment. A licensed clinical coordinator from Verdant
-              will email <span className="text-emerald-300 font-medium">{answers.email || 'you'}</span> with
-              clinician availability and next steps within 24 hours.
+              Apoteker kami di <strong className="text-white">Rafa Apotek</strong> sedang menyiapkan rincian obat Anda.
+              Kami akan menghubungi nomor <span className="text-emerald-300 font-medium">{answers.kontak}</span> dalam waktu singkat untuk konfirmasi pengantaran.
             </p>
             <button
               onClick={resetAndClose}
-              className="px-6 py-2.5 rounded-full text-xs font-semibold text-[#091a24] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 transition-all"
+              className="px-6 py-2.5 rounded-full text-xs font-semibold text-[#091a24] bg-gradient-to-r from-[#5beba6] to-[#aef773] hover:brightness-105 active:scale-95 transition-all cursor-pointer"
             >
-              Back to Verdant
+              Kembali ke Beranda
             </button>
           </div>
         )}

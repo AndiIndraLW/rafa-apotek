@@ -4,34 +4,34 @@ export default function HowItWorks() {
   const steps = [
     {
       number: '01',
-      title: "Tell us what's going on",
+      title: 'Pilih Obat atau Foto Resep',
       description:
-        "A five-minute assessment covers your history, your goals, and how you're actually sleeping.",
+        'Pilih obat bebas dan vitamin dari katalog, atau cukup unggah foto resep dokter Anda melalui formulir apotek online kami.',
     },
     {
       number: '02',
-      title: 'Meet your clinician',
+      title: 'Pemeriksaan oleh Apoteker',
       description:
-        'A licensed provider reviews everything first, then meets you by video — usually the same week.',
+        'Apoteker berizin kami memverifikasi keaslian resep, kecocokan dosis, dan interaksi obat demi keamanan konsumsi Anda.',
     },
     {
       number: '03',
-      title: 'Care that keeps up',
+      title: 'Kemasan Farmasi & Antar Cepat',
       description:
-        'Medication, labs and follow-ups live in one plan, adjusted as your body responds.',
+        'Obat dikemas higienis dengan segel keamanan berstandar apotek dan dikirimkan langsung ke alamat Anda dengan cepat.',
     },
   ];
 
   return (
-    <section id="how-it-works" className="bg-[#daf5f0] py-20 md:py-28 text-[#091f2c]">
+    <section id="layanan" data-theme="light" className="bg-[#daf5f0] py-20 md:py-28 text-[#091f2c] scroll-mt-6">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
           <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-teal-900/60 block mb-3">
-            HOW IT WORKS
+            CARA BELI OBAT & TEBUS RESEP
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#091f2c] tracking-tight">
-            Care that starts with a conversation.
+            Mudah, cepat, dan terjamin aman sampai ke tangan Anda.
           </h2>
         </div>
 
